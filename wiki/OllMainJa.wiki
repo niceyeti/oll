@@ -29,10 +29,10 @@ Oll: オンライン学習ライブラリ
 
 = 使い方 =
 
-C++ライブラリ（説明はまだ）とプログラムを提供しています
+以下ではプログラム oll_train oll_test oll_lineの使い方を説明します。
+C++ライブラリの使い方については少々お待ちください（興味がある人はoll_train.cppなどを参考にしてください）。
 
 == oll_train ==
-----
 {{{
 oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT
 P   : Perceptron
@@ -58,7 +58,6 @@ oll_trainはtrainfileに書かれた訓練ファイルを読み込み、学習�
 -I は学習データを何回繰り返し見るかを指定します。大抵は10～20ですが、CWだけは1回だけでも大体良い精度に達成します。-I=0が特別で、データを順に1度だけ見て学習します（繰り返し回数は1)が、訓練データは保存しないため効率的です。
 
 == oll_test ==
-----
 {{{
 oll_test testfile modelfile [-v]
 }}}
@@ -69,7 +68,6 @@ oll_test testfile modelfile [-v]
 
 
 == oll_line ==
-----
 {{{
    oll_line (P|AP|PA|PA1|PA2|CW) -C=FLOAT -b=FLOAT -I=INT
    P   : Perceptron
