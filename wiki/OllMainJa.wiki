@@ -65,19 +65,67 @@ oll_test testfile modelfile [-v]
 -vを指定すると、各訓練データに対する推定結果（スコア）を１行ずつ表示します。
 
 
+
+== oll_line ==
+{{{
+   oll_line (P|AP|PA|PA1|PA2|CW) -C=FLOAT -b=FLOAT -I=INT
+   P   : Perceptron
+   AP  : Averaged Perceptron
+   PA  : Passive Agressive
+   PA1 : Passive Agressive I
+   PA2 : Passive Agressive II
+   PAK : Kernelized Passive Agressive
+   CW  : Confidence Weighted
+   AL  : ALMA HD (heavy)
+   -C    Regularization Paramter (Default 1.0)
+   -b    Bias (Default 0.0)
+
+   Standard Input Format
+   A (1|-1) id:val id:val ... (Add training example)
+   T (1|-1) id:val id:val ... (Test Example)
+   S modelfile (Save current model to modelfile)
+   L modelfile (Load current model to modelfile)
+}}}
+oll_lineではインタラクティブに訓練、推定、保存、読み込みを行います。起動時のオプションはoll_trainと同じです（-Iは繰り返しみないのでありません。-I=0と同じです）
+標準入力から１行ずつ命令を送ります。命令フォーマットは以下の通りです。
+{{{
+   * (1|-1) id:val id:val ... (Add training example)
+}}}
+*はA,T,S,Lのいずれかです。
+Aでは学習を行います。その後に続くフォーマットはoll_train, oll_testで利用するデータフォーマットと同様です。
+Tでは推定を行い推定結果を標準出力に出します。その後に続くフォーマットはoll_train, oll_testで利用するデータフォーマットと同様です（ラベル部分は無視されます。適当に1,-1を入れておいてください）。
+S modelfileでは、modelfileに学習結果を保存します。注：Sとmodelfileの間のスペースは必ず1つにしてください。
+L modelfileでは、modelfileから学習結果を読み込みます。
+
 ==使用例==
 {{{
-  ./oll_train P train1 model1 -C=2.0 -b=1.0 -I=10
+  >./oll_train P train1 model1 -C=2.0 -b=1.0 -I=10
+　Read Done.
+　..........FINISH!
+　>./oll_test test1 model1
+  Accuracy 93.355% (4664/4996)
+  (Answer, Predict): (p,p):2309 (p,n):185 (n,p):147 (n,n):2355
 }}}
-ファイルtrain1に書かれた訓練データを読み込みパーセプトロンで学習し、学習結果をファイルmodelに保存します。正則化パラメータは2.0, バイアス項は1.0、繰り返し回数は10です。
-
+ファイルtrain1に書かれた訓練データを読み込みパーセプトロンで学習し、学習結果をファイルmodelに保存します。正則化パラメータは2.0, バイアス項は1.0、繰り返し回数は10です。次に学習結果を読み込み、test1に対して推定を行い、精度（正解数/問題数）と（正解、予想）の組み合わせ（p=正例：ラベルが+1だったもの、n=負例：ラベルが-1だったもの）を表示します。
 {{{
-　./oll_train CW dat/xaa model dat/xab -I=0
+　>./oll_train CW dat/xaa model dat/xab -I=0
   FINISH!
   Accuracy 96.437% (4818/4996)
   (Answer, Predict): (p,p):2422 (p,n):72 (n,p):106 (n,n):2396
 }}}
-ファイルtrain2に書かれた訓練データを読み込みConfidence Weighted Linear-Classificationで学習し、学習結果をmode2に保存します。繰り返し回数は1回ですが、訓練データは保存せず読み込んだ順に学習します。また、学習結果をdev2に対し適用し、精度と（正解、予想）の組み合わせ（p=正例：ラベルが+1だったもの、n=負例：ラベルが-1だったもの）を表示します。
+ファイルtrain2に書かれた訓練データを読み込みConfidence Weighted Linear-Classificationで学習し、学習結果をmode2に保存します。繰り返し回数は1回ですが、訓練データは保存せず読み込んだ順に学習します。また、学習結果をdev2に対し適用し、精度を表示します。
+{{{
+　>./oll_line PA1
+  A 1 0:1.0 1:2.0 2:-1.0  （入力）
+  A -1 0:-0.5 1:1.0 2:-0.5（入力）
+  T 0 0:1.0 1:1.0　　　　　（入力）
+  0.171429　　　　　　　　　（出力）
+　S model1
+  >./oll_line PA1
+  L model1
+  T 0 0:1.0 1:1.0　　　　　（入力）
+  0.171429　　　　　　　　　（出力）
+}}}
 
 
  
