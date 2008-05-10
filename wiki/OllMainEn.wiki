@@ -163,15 +163,20 @@ Data news20.binary　[http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/bin
   * # of features: 1,355,191
 Shuffled, and splited the data into 15000 training examples and 4996 test examples. Used the default C value (C=1.0)
 
+In the column of SVM (linear), and SVM (2nd polynomial Kernel), I used [http://chasen.org/~taku/software/TinySVM/ tinySVM] for 
+SVM optimization (used default parameters). I didn't limit the number of iterations for SVM.
+
 -I=10
-|| Method      || P   || AP    || PA   || PA1  || PA2 || CW ||
-|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.59 || 0.60 ||  1.39 ||
-|| Accuracy (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497 ||
+|| Method      || P   || AP    || PA   || PA1  || PA2 || CW || SVM (linear) || SVM (2nd Kernel) ||
+|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.59 || 0.60 ||  1.39 || 1122.60 || 1128.57
+|| Accuracy (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497 || 96.237 ||  ||
 
 -I=1
-|| Method      || P    || AP   || PA   || PA1  || PA2  || CW ||
-|| Training Time (s) || 0.05 || 0.09 || 0.07 || 0.08 || 0.08 || 0.21 ||
+|| Method      || P    || AP   || PA   || PA1  || PA2  || CW || SVM (linear) || SVM (2nd Kernel) ||
+|| Training Time (s) || 0.05 || 0.09 || 0.07 || 0.08 || 0.08 || 0.21 || 
 || Accuracy (%) || 93.355 || 94.035 || 96.157 || 96.137 || 95.917 ||  96.437 ||
+
+I know that I still need to check results of other implementations/methods. I will continue the experiments, but I welcome the comments about the results with other methods/implementations. 
 
 ==Reference==
   * Perceptron
