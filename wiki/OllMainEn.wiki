@@ -165,8 +165,8 @@ Shuffled, and splited the data into 15000 training examples and 4996 test exampl
 
 -I=10
 || Method      || P   || AP    || PA   || PA1  || PA2 || CW ||
-|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.58 || 0.59 || 0.60 ||  1.39 ||
-|| Accuracy (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497% ||
+|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.59 || 0.60 ||  1.39 ||
+|| Accuracy (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497 ||
 
 -I=1
 || Method      || P    || AP   || PA   || PA1  || PA2  || CW ||
