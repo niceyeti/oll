@@ -1,12 +1,12 @@
-Oll: Online Learning Library
+OLL: Online Learning Library
 
 = Introduction =
 
-*Oll* is a library supporting several for online-learning algorithms, which is specialized for large-scale, but sparse, learning tasks such as Natural Language Processing tasks. While these algorithms are very efficient in terms of speed, and space (linear in the number of examples, and features), its performances are comparable to the batch-style learning methods such as SVMs, MEs. 
+*OLL* is a library supporting several for online-learning algorithms, which is specialized for large-scale, but sparse, learning tasks such as Natural Language Processing tasks. While these algorithms are very efficient in terms of speed, and space (linear in the number of examples, and features), its performances are comparable to the batch-style learning methods such as SVMs, MEs. 
 
-*Oll* provides C++ library, and stand-alone programs for learning, predicting. 
+OLL provides C++ library, and stand-alone programs for learning, predicting. 
 
-Currently, Oll supports following algorithms: 
+Currently, OLL supports following algorithms: 
 
 Perceptron 
 Averaged Perceptron 
@@ -34,7 +34,7 @@ Programs: oll_train oll_test oll_line
 
 == Data Format ==
 
-The data format for trainfile, and testfile are same as that for libsvm, tinySVM. Each line containes one example; the label followed by the fired featureID:value pairs. These featureIDs are not necesallry sorted.
+The data format for trainfile, and testfile are same as that for libsvm, tinySVM. Each line containes one example; the label followed by the fired featureID:value pairs. These featureIDs are not necessarily sorted.
 
 (BNF-like representation)
 {{{
