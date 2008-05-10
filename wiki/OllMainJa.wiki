@@ -89,9 +89,9 @@ oll_test testfile modelfile [-v]
 oll_lineではインタラクティブに訓練、推定、保存、読み込みを行います。起動時のオプションはoll_trainと同じです（-Iは繰り返しみないのでありません。-I=0と同じです）
 標準入力から１行ずつ命令を送ります。命令フォーマットは以下の通りです。
 {{{
-   * (1|-1) id:val id:val ... (Add training example)
+   # (1|-1) id:val id:val ... (Add training example)
 }}}
-*はA,T,S,Lのいずれかです。
+#はA,T,S,Lのいずれかです。
 Aでは学習を行います。その後に続くフォーマットはoll_train, oll_testで利用するデータフォーマットと同様です。
 Tでは推定を行い推定結果を標準出力に出します。その後に続くフォーマットはoll_train, oll_testで利用するデータフォーマットと同様です（ラベル部分は無視されます。適当に1,-1を入れておいてください）。
 S modelfileでは、modelfileに学習結果を保存します。注：Sとmodelfileの間のスペースは必ず1つにしてください。
