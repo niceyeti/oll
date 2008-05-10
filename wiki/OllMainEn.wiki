@@ -1,0 +1,139 @@
+Oll: Online Learning Library
+
+= Introduction =
+
+*Oll* is a library supporting several for online-learning algorithms, which is specialized for large-scale, but sparse, learning tasks such as Natural Language Processing tasks. While these algorithms are very efficient in terms of speed, and space (linear in the number of examples, and features), its performances are comparable to the batch-style learning methods such as SVMs, MEs. 
+
+*Oll* provides C++ library, and stand-alone programs for learning, predicting. 
+
+Currently, Oll supports following algorithms: 
+
+Perceptron 
+Averaged Perceptron 
+Passive Agressive (PA, PA-I, PA-II) 
+ALMA (modified slightly from original) 
+Confidence Weighted Linear-Classification. 
+
+= Download =
+  [http://code.google.com/p/oll/downloads/list Please download the latest version from here.]
+
+= Install =
+
+Get the latest source tarball (oll-*.tar.gz, * is a version number), type the followings. Note that you can change the install directory by replacing "./confiugre" with "./configure" --prefix=dir
+{{{
+>tar xzvf oll-*.tar.gz
+>cd oll-*
+>./configure
+>make
+>sudo make install
+}}}
+
+= Usage =
+
+Programs: oll_train oll_test oll_line
+
+== oll_train ==
+{{{
+oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT
+P   : Perceptron
+AP  : Averaged Perceptron
+PA  : Passive Agressive
+PA1 : Passive Agressive I
+PA2 : Passive Agressive II
+PAK : Kernelized Passive Agressive
+CW  : Confidence Weighted
+AL  : ALMA HD (heavy)
+-C    Regularization Paramter (Default 1.0)
+-b    Bias (Default 0.0)
+-I    Iteration (Default 10, 0 = one pass without storing)
+}}}
+oll_train read training examples from _trainfile_ and then save the trained model to _modelfile_. If _devfile_ is specified, the program apply the model to _devfile_ and print the accuracy.
+
+The second argument denotes the training method. For exapmle, "P" means that Perceptron is used as a training method. Other training methods are shown in above. I recommend PA1 and CW.
+
+_-C_ specifies the ratio of the ragularization term. You many need to choose the optimal paramter by the result of the accuracy of _dev_file_ (The default is C=1.0).
+
+_-b_ specifies the bias. This add the virtual feature to each example with the specied value. The default is b=1.0.
+
+_-I_ specifies the number of iteration at training. In general, -I=10, 20 is enough, but CW can acheive the good performance with only one iteration. _-I=0_ is special: the program sees each example and train the model on the fly, without storing examples. 
+
+== oll_test ==
+{{{
+oll_test testfile modelfile [-v]
+}}}
+Read test data from _testfile_, the trained model from _modelfile_, and print the result of the accuracy to stdout.
+
+If you specify _-v_, the results of each example (score) will be printed to stdout.
+
+
+
+== oll_line ==
+{{{
+   oll_line (P|AP|PA|PA1|PA2|CW) -C=FLOAT -b=FLOAT -I=INT
+   P   : Perceptron
+   AP  : Averaged Perceptron
+   PA  : Passive Agressive
+   PA1 : Passive Agressive I
+   PA2 : Passive Agressive II
+   PAK : Kernelized Passive Agressive
+   CW  : Confidence Weighted
+   AL  : ALMA HD (heavy)
+   -C    Regularization Paramter (Default 1.0)
+   -b    Bias (Default 0.0)
+
+   Standard Input Format
+   A (1|-1) id:val id:val ... (Add training example)
+   T (1|-1) id:val id:val ... (Test Example)
+   S modelfile (Save current model to modelfile)
+   L modelfile (Load current model to modelfile)
+}}}
+_oll_line_ supports interactive Train, Predict, Save, and Load. The options are same as _oll_train_ (-I is not supported, _oll_line_ always use -I=0). Read the operation from stdin. The format is as follows;
+
+{{{
+   # (1|-1) id:val id:val ...
+}}}
+# is either A or T.
+A performs train. The follow-on format is same as the that for the file in _oll_train
+T performs predict, and print the result to stdout. The follow-on format is same as the that for the file in _oll_train_. (The label will be ignored. Please use any value here). 
+
+{{{
+   # filename
+}}}
+S performs save the model to _modelfile_. Note: The number of space between S and modelfile should be 1.
+L performs load the model from _modelfile_.
+
+==Example==
+{{{
+  >./oll_train P train1 model1 -C=2.0 -b=1.0 -I=10
+　Read Done.
+　..........FINISH!
+　>./oll_test test1 model1
+  Accuracy 93.355% (4664/4996)
+  (Answer, Predict): (p,p):2309 (p,n):185 (n,p):147 (n,n):2355
+}}}
+
+Read training examples from _train1_, train the model using Perceptron algorihm, and save the trained model to _model1_. The regularization paratemr is 2.0, the bias is 1.0, and the number of iteration is 10. 
+
+Read test examples from _test1_, predict the labels of them, and print the accuracy to stdout: Accuracy (Corrected/All) (p=positive, n=negative). 
+{{{
+　>./oll_train CW dat/xaa model dat/xab -I=0
+  FINISH!
+  Accuracy 96.437% (4818/4996)
+  (Answer, Predict): (p,p):2422 (p,n):72 (n,p):106 (n,n):2396
+}}}
+Read training examples from _train2_ ,train the model using Confidence Weighted Linear-Classification, and save the trained model to _mode2_. It also print the accuracy of the devfile using the model.
+{{{
+　>./oll_line PA1
+  A 1 0:1.0 1:2.0 2:-1.0  （入力）
+  A -1 0:-0.5 1:1.0 2:-0.5（入力）
+  T 0 0:1.0 1:1.0　　　　　（入力）
+  0.171429　　　　　　　　　（出力）
+　S model1
+  >./oll_line PA1
+  L model1
+  T 0 0:1.0 1:1.0　　　　　（入力）
+  0.171429　　　　　　　　　（出力）
+}}}
+
+
+ 
