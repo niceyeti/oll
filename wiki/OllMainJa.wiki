@@ -32,6 +32,26 @@ OLL: オンライン学習ライブラリ
 以下ではプログラム oll_train oll_test oll_lineの使い方を説明します。
 C++ライブラリの使い方については少々お待ちください（興味がある人はoll_train.cppなどを参考にしてください）。
 
+== データフォーマット ==
+
+訓練時、テスト時に利用するデータフォーマットはlibsvm, tinySVMなどと同様のフォーマットです。各行が一訓練例になっており、最初に正例なら+1, 負例なら-1, その後に、発火した素性番号:値の列を並べます。素性番号はソートされていなくても構いません。
+
+(BNF-like representation)
+{{{
+<class> .=. +1 | -1 
+<feature> .=. integer (>=1)
+<value> .=. real
+<line> .=. <class> <feature>:<value><feature>:<value> ... <feature>:<value>
+}}}
+
+例
+{{{
++1 0:1.0 201:2.2 744:-0.3 15:3.0
+-1 47:2.0 66:0.1 733:1.0 500:1.0
++1 3:1.0 201:2.2 300:-0.3 15:0.35
++1 4:2.0 103:0.4 405:-0.3 11:1.5
+}}}
+
 == oll_train ==
 {{{
 oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT
