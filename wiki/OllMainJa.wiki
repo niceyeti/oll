@@ -1,6 +1,83 @@
 Oll: オンライン学習ライブラリ
 
-= Introduction =
+= はじめに =
 
-Add your content here.
+*Oll* は様々なオンライン学習をサポートした機械学習ライブラリであり、特に自然言語処理など、大規模、かつ疎な学習問題に最適化されています。これらのオンライン学習手法は速度面、作業領域面で非常に効率的（学習サンプル数、素性種類数に比例）でありながら、SVMsやMEsなどのバッチ学習と同程度の精度を達成します。
 
+C++ libraryと学習、推定を行なうプログラムを提供しています。
+
+現在サポートしている学習手法は次の通りです。
+  * Perceptron [F. Rosenblatt 1958]
+  * Averaged Perceptron [M. Collins 2002] 
+  * Passive Agressive (PA, PA-I, PA-II) [K. Crammer, et. al. 2006]
+  * ALMA (modified slightly from original) [H. Daume, 2007]
+  * Confidence Weighted Linear-Classification [M. Dredze, 2008]
+
+= ダウンロード =
+  [http://code.google.com/p/oll/downloads/list ここの最新版をダウンロードしてください]
+
+= インストール方法 =
+
+最新のソースコード(oll-*.tar.gz, *はversion番号）をダウンロードしてきたら、次のようにしてインストールしてください。./configureの際に、./configure --prefix=ディレクトリとすることで、インストールするディレクトリを指定できます。
+{{{
+>tar xzvf oll-*.tar.gz
+>cd oll-*
+>./configure
+>make
+>sudo make install
+}}}
+
+= 使い方 =
+
+C++ライブラリとプログラムを提供しています
+
+== oll_train ==
+{{{
+oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT
+P   : Perceptron
+AP  : Averaged Perceptron
+PA  : Passive Agressive
+PA1 : Passive Agressive I
+PA2 : Passive Agressive II
+PAK : Kernelized Passive Agressive
+CW  : Confidence Weighted
+AL  : ALMA HD (heavy)
+-C    Regularization Paramter (Default 1.0)
+-b    Bias (Default 0.0)
+-I    Iteration (Default 10, 0 = one pass without storing)
+}}}
+oll_trainはtrainfileに書かれた訓練ファイルを読み込み、学習結果をmodelfileに書き込みます。devfileが指定されている場合、学習結果をdevfileで試し、精度を表示します。
+
+第2引数では学習手法を指定します。例えば"P"を指定した場合はperceptronで学習します。それぞれの学習手法は上の通りです。お勧めはPA1とCWです。
+
+-Cで正則化項で学習の割合を指定します。これはdevfileでの精度で調整することが必要です（指定しない場合は1.0になります。）。
+
+-bはバイアス項です。各訓練事例に指定した値を持つ仮想的な素性を追加します。指定しない場合は0.0になります。
+
+-I は学習データを何回繰り返し見るかを指定します。大抵は10～20ですが、CWだけは1回だけでも大体良い精度に達成します。-I=0が特別で、データを順に1度だけ見て学習します（繰り返し回数は1)が、訓練データは保存しないため効率的です。
+
+== oll_test ==
+{{{
+oll_test testfile modelfile [-v]
+}}}
+ファイルtestfileに書かれたテストデータを読み込み、modelfileから学習結果を読み込み、精度の結果を表示します。
+
+-vを指定すると、各訓練データに対する推定結果（スコア）を１行ずつ表示します。
+
+
+==使用例==
+{{{
+  ./oll_train P train1 model1 -C=2.0 -b=1.0 -I=10
+}}}
+ファイルtrain1に書かれた訓練データを読み込みパーセプトロンで学習し、学習結果をファイルmodelに保存します。正則化パラメータは2.0, バイアス項は1.0、繰り返し回数は10です。
+
+{{{
+　./oll_train CW dat/xaa model dat/xab -I=0
+  FINISH!
+  Accuracy 96.437% (4818/4996)
+  (Answer, Predict): (p,p):2422 (p,n):72 (n,p):106 (n,n):2396
+}}}
+ファイルtrain2に書かれた訓練データを読み込みConfidence Weighted Linear-Classificationで学習し、学習結果をmode2に保存します。繰り返し回数は1回ですが、訓練データは保存せず読み込んだ順に学習します。また、学習結果をdev2に対し適用し、精度と（正解、予想）の組み合わせ（p=正例：ラベルが+1だったもの、n=負例：ラベルが-1だったもの）を表示します。
+
+
+ 
