@@ -168,7 +168,7 @@ SVM optimization (used default parameters). I didn't limit the number of iterati
 
 -I=10
 || Method      || P   || AP    || PA   || PA1  || PA2 || CW || SVM (linear) || SVM (2nd Kernel) ||
-|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.59 || 0.60 ||  1.39 || 1122.60 || 1128.57
+|| Training Time (s) || 0.54 || 0.56 || 0.58 || 0.59 || 0.60 ||  1.39 || 1122.60 || 1128.57 ||
 || Accuracy (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497 || 96.237 ||  ||
 
 -I=1
