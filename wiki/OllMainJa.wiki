@@ -148,6 +148,24 @@ Lは学習結果をmodelfileから読み込みます。
   0.171429　　　　　　　　　（出力）
 }}}
 
+==実験==
+
+実験データ news20.binary　[http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#news20.binary libsvmリンク]
+  * # of classes: 2
+  * # of data: 19,996
+  * # of features: 1,355,191
+シャッフルし、15000例の訓練データと4996例のテストデータに分けた。Cのチューニングは特に行なっていない（C=1.0)
+
+-I=10
+|| 手法      || P   || AP    || PA   || PA1  || PA2 || CW ||
+|| 学習時間 (s) || 0.54 || 0.56 || 0.58 || 0.58 || 0.59 || 0.60 ||  1.39 ||
+|| 精度 (%) || 94.696 || 95.336 || 96.477 || 96.457 || 96.457 || 96.497% ||
+
+-I=1
+|| 手法      || P    || AP   || PA   || PA1  || PA2  || CW ||
+|| 学習時間 (s) || 0.05 || 0.09 || 0.07 || 0.08 || 0.08 || 0.08 || 0.21 ||
+|| 精度 (%) || 93.355 || 94.035 || 96.157 || 96.137 || 95.917 ||  96.437 ||
+
 ==参考文献==
   * Perceptron
     Rosenblatt, "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain", Cornell Aeronautical Laboratory, Psychological Review, v65, No. 6, pp. 386-408, 1958.
