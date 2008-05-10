@@ -127,5 +127,27 @@ Lは学習結果をmodelfileから読み込みます。
   0.171429　　　　　　　　　（出力）
 }}}
 
+==参考文献==
+- Perceptron
+ [1] F. Rosenblatt, "The Perceptron: A Probabilistic Model for Information St\
+orage and Organization in the Brain", Cornell Aeronautical Laboratory, Psycholo\
+gical Review, v65, No. 6, pp. 386-408, 1958.
+ [2] Y. Freund, and R. E. Schapire, "Large margin classification using the pe\
+rceptron algorithm". COLT 1998
+
+- Averaged Perceptron
+ [3] M. Collins, "Discriminative Training Methods for Hidden Markov Models: T\
+heory and Experiments with Perceptron Algorithms", EMNLP 2002.
+
+ [4] K. Crammer, O. Dekel. J. Keshet, S. Shalev-Shwartz, Y. Singer, "Online P\
+assive-Aggressive Algorithms.", Journal of Machine Learning Research, 2006.
+
+- Confidence Weighted
+ [5] M. Dredze, K. Crammer, F. Pereira. "Confidence-Weighted Linear Classific\
+ation", ICML 2008
+
+
+
+
 
  
