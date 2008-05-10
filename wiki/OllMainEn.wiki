@@ -124,16 +124,17 @@ Read test examples from _test1_, predict the labels of them, and print the accur
 Read training examples from _train2_ ,train the model using Confidence Weighted Linear-Classification, and save the trained model to _mode2_. It also print the accuracy of the devfile using the model.
 {{{
 　>./oll_line PA1
-  A 1 0:1.0 1:2.0 2:-1.0  （入力）
-  A -1 0:-0.5 1:1.0 2:-0.5（入力）
-  T 0 0:1.0 1:1.0　　　　　（入力）
-  0.171429　　　　　　　　　（出力）
-　S model1
+  A 1 0:1.0 1:2.0 2:-1.0   (Input)
+  A -1 0:-0.5 1:1.0 2:-0.5 (Input)
+  T 0 0:1.0 1:1.0　　　　　  (Input)
+  0.171429　　　　　　　　　 (Output)
+　S model1                 (Input)
   >./oll_line PA1
   L model1
-  T 0 0:1.0 1:1.0　　　　　（入力）
-  0.171429　　　　　　　　　（出力）
+  T 0 0:1.0 1:1.0　　　　　(Input)
+  0.171429　　　　　　　　　(output)
 }}}
+
 
 
  
