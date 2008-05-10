@@ -155,6 +155,17 @@ Read training examples from _train2_ ,train the model using Confidence Weighted 
   0.171429　　　　　　　　　(output)
 }}}
 
+==Reference==
+  * Perceptron
+    Rosenblatt, "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain", Cornell Aeronautical Laboratory, Psychological Review, v65, No. 6, pp. 386-408, 1958.
+    Y. Freund, and R. E. Schapire, "Large margin classification using the perceptron algorithm". COLT 1998
+  * Averaged Perceptron
+    M. Collins, "Discriminative Training Methods for Hidden Markov Models: Theory and Experiments with Perceptron Algorithms", EMNLP 2002.
+  * Passive Agressive
+    K. Crammer, O. Dekel. J. Keshet, S. Shalev-Shwartz, Y. Singer, "Online Passive-Aggressive Algorithms.", Journal of Machine Learning Research, 2006.
+  * Confidence Weighted
+    M. Dredze, K. Crammer, F. Pereira. "Confidence-Weighted Linear Classification", ICML 2008
+
 
 
  
