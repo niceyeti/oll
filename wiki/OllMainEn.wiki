@@ -2,7 +2,7 @@ OLL: Online Learning Library
 
 = Introduction =
 
-*OLL* is a library supporting several for online-learning algorithms, which is specialized for large-scale, but sparse, learning tasks such as Natural Language Processing tasks. While these algorithms are very efficient in terms of speed, and space (linear in the number of examples, and features), its performances are comparable to the batch-style learning methods such as SVMs, MEs. 
+*OLL* is a library for online-learning algorithms, which is specialized for large-scale, but sparse, learning tasks such as Natural Language Processing tasks. While these algorithms are very efficient in terms of speed, and space (linear in the number of examples, and features), its performances are comparable to the batch-style learning methods such as SVMs, MEs. 
 
 OLL provides C++ library, and stand-alone programs for learning, predicting. 
 
