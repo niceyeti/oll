@@ -13,6 +13,12 @@ OLL: オンライン学習ライブラリ
   * ALMA (modified slightly from original) [H. Daume, 2007]
   * Confidence Weighted Linear-Classification [M. Dredze, 2008]
 
+= 更新情報 =
+
+  * 2008 12/24 0.02 リリース
+  ** バグフィックス、シャッフリングのサポート
+  * 2008 12/05 0.01 リリース
+
 = ダウンロード =
   [http://code.google.com/p/oll/downloads/list ここの最新版をダウンロードしてください]
 
@@ -54,7 +60,7 @@ C++ライブラリの使い方については少々お待ちください（興�
 
 == oll_train ==
 {{{
-oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT
+oll_train (P|AP|PA|PA1|PA2|CW) trainfile modelfile [devfile] -C=FLOAT -b=FLOAT -I=INT -s=BOOL
 P   : Perceptron
 AP  : Averaged Perceptron
 PA  : Passive Agressive
@@ -66,6 +72,7 @@ AL  : ALMA HD (heavy)
 -C    Regularization Paramter (Default 1.0)
 -b    Bias (Default 0.0)
 -I    Iteration (Default 10, 0 = one pass without storing)
+-s    1: Enable Shuffle, 0: Disable Shuffle (Default 1)
 }}}
 oll_trainはtrainfileに書かれた訓練ファイルを読み込み、学習結果をmodelfileに書き込みます。devfileが指定されている場合、学習結果をdevfileで試し、精度を表示します。
 
@@ -76,6 +83,8 @@ oll_trainはtrainfileに書かれた訓練ファイルを読み込み、学習�
 -bはバイアス項です。各訓練事例に指定した値を持つ仮想的な素性を追加します。指定しない場合は0.0になります。
 
 -I は学習データを何回繰り返し見るかを指定します。大抵は10～20ですが、CWだけは1回だけでも大体良い精度に達成します。-I=0が特別で、データを順に1度だけ見て学習します（繰り返し回数は1)が、訓練データは保存しないため効率的です。
+
+-s は訓練データをシャッフルするかどうかを指定します。1の時はシャッフルし、0の時はシャッフルしません。オンライン学習では、訓練データを見る順番が非常に影響するので、シャッフルした方が良いです。-I=0の時は-sの値は無視されます。
 
 == oll_test ==
 {{{
