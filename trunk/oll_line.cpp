@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "oll.hpp"
 
 const char* OLL_PROGNAME = "oll_online";
