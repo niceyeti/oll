@@ -116,7 +116,7 @@ namespace oll_tool{
   }
 
 
-  oll::oll() : exampleN(0), featureN(0), updateN(0), C(1.f), bias(0.f), b(0.f), b0(0.f), ba(0.f), covb(0.f) {}
+  oll::oll() : exampleN(0), featureN(0), updateN(0), C(1.f), bias(0.f), b(0.f), b0(0.f), ba(0.f), covb(1.f) {}
   oll::~oll() {}
 
   void oll::setC(const float C_){

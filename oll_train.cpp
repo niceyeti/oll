@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "oll.hpp"
 
 static const char* OLL_PROGNAME = "oll_train";
